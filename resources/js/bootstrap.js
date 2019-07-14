@@ -55,14 +55,11 @@ if (token) {
 // });
 
 /**
- * Set an instance for laravel echo
- * which would aid in notifications
+ * Import the necessary Vue Modules needed
+ * to scale the application for frontend scaffolding
  */
-import Echo from "laravel-echo"
 
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '4ad3afb3e737c18de1d6',
-    cluster: 'eu',
-    encrypted: true
-});
+ import Vue from 'vue'
+ import VueRouter from 'vue-router'
+ import Homepage from './components/Homepage'
+ import Read from './components/Read'
