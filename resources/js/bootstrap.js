@@ -59,7 +59,4 @@ if (token) {
  * to scale the application for frontend scaffolding
  */
 
- import Vue from 'vue'
- import VueRouter from 'vue-router'
- import Homepage from './components/Homepage'
- import Read from './components/Read'
+ 
