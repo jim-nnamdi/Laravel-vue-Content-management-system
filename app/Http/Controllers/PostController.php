@@ -39,7 +39,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'image' => 'required',
+            'user_id' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg,gif',
         ]);
 
         $post = new Post([
