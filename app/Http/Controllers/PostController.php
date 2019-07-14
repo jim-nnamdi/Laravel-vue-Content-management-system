@@ -34,26 +34,35 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    
+     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            'user_id' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg,gif',
+            'user_id' => 'required',            
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $post = new Post([
-            'title' => $request->get('title'),
-            'body' => $request->get('body'),
-            'image' => $request->get('image'),
-        ]);
+        $post = new Post;
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = $image->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/posts');
+            $imagePath = $destinationPath . "/" . $name;
+            $image->move($destinationPath, $name);
+            $post->image = $name;
+        }
+
+        $post->user_id = $request->user_id;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->image =$request->image;
         $post->save();
+
         return redirect('/')->with('success', 'Post added!');
-
     }
-
     /**
      * Display the specified resource.
      *
